@@ -41,11 +41,7 @@
   "keywords": [
     "dalekjs"
   ],
-  "author": {
-    "name": "Sebastian Golasch",
-    "email": "public@asciidisco.com",
-    "url": "http://asciidisco.com"
-  },
+  "author": "Sebastian Golasch <public@asciidisco.com> (http://asciidisco.com)",
   "licenses": [
     {
       "type": "MIT",
@@ -54,5 +50,12 @@
   ],
   "engine": {
     "node": ">=0.8"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT"
 }

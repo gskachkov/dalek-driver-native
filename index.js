@@ -76,7 +76,7 @@ var DriverNative = function (opts) {
   // for the particular browser
   browser
     .launch(browserConf, this.reporterEvents, this.config)
-    .then(this.events.emit.bind(this.events, 'driver:ready:native:' + this.browserName, browser));
+    .then(this.events.emit.bind(this.events, 'driver:ready:native-early:' + this.browserName, browser));
 };
 
 /**
@@ -130,9 +130,9 @@ DriverNative.prototype = {
       this.browserDefaults = data.defaults;
     }.bind(this));
     // issue the kill command to the browser, when all tests are completed
-    this.events.on('tests:complete:native:' + this.browserName, browser.kill.bind(browser));
+    this.events.on('tests:complete:native-early:' + this.browserName, browser.kill.bind(browser));
     // clear the webdriver session, when all tests are completed
-    this.events.on('tests:complete:native:' + this.browserName, this.webdriverClient.closeSession.bind(this.webdriverClient));
+    this.events.on('tests:complete:native-early:' + this.browserName, this.webdriverClient.closeSession.bind(this.webdriverClient));
     return this;
   },
 
@@ -256,7 +256,7 @@ DriverNative.prototype = {
   _sessionStatus: function (sessionInfo) {
     var defer = Q.defer();
     this.sessionStatus = JSON.parse(sessionInfo).value;
-    this.events.emit('driver:sessionStatus:native:' + this.browserName, this.sessionStatus);
+    this.events.emit('driver:sessionStatus:native-early:' + this.browserName, this.sessionStatus);
     defer.resolve();
     return defer.promise;
   },
@@ -273,7 +273,7 @@ DriverNative.prototype = {
   _driverStatus: function (statusInfo) {
     var defer = Q.defer();
     this.driverStatus = JSON.parse(statusInfo).value;
-    this.events.emit('driver:status:native:' + this.browserName, this.driverStatus);
+    this.events.emit('driver:status:native-early:' + this.browserName, this.driverStatus);
     defer.resolve();
     return defer.promise;
   },
